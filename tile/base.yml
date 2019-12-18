@@ -1,0 +1,30 @@
+---
+name: nginx
+label: nginx tile
+description: Serves as an example tile.
+metadata_version: "2.7"
+minimum_version_for_upgrade: 0.0.1
+product_version: $( version )
+provides_product_versions:
+- name: nginx
+  version: $( version )
+    
+icon_image: $( icon )
+
+rank: 90
+serial: false
+
+post_deploy_errands: []
+    
+releases:
+- $( release "nginx" )    
+
+stemcell_criteria: $( stemcell "ubuntu-xenial" )
+property_blueprints:
+- $( property "nginx_conf" )
+
+form_types:
+- $( form "nginx_conf" )
+
+job_types:
+- $( instance_group "nginx-instance-group" )

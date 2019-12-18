@@ -1,0 +1,7 @@
+name: nginx_conf
+label: Nginx congiruation
+description: This is the first form tab.
+property_inputs:
+- reference: .properties.nginx_conf
+  label: First property!
+  description: The first property.

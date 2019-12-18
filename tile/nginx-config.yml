@@ -1,0 +1,40 @@
+# om
+product-name: nginx
+product-properties:
+  .properties.nginx_conf:
+    value: "user nobody vcap; # group vcap can read most directories
+        worker_processes  1;
+        error_log /var/vcap/sys/log/nginx/error.log   info;
+        events {
+          worker_connections  1024;
+        }
+        http {
+          include /var/vcap/packages/nginx/conf/mime.types;
+          default_type  application/octet-stream;
+          sendfile        on;
+          ssi on;
+          keepalive_timeout  65;
+          server_names_hash_bucket_size 64;
+          server {
+            server_name _; # invalid value which will never trigger on a real hostname.
+            listen *:80;
+            # FIXME: replace all occurrences of 'example.com' with your server's FQDN
+            access_log /var/vcap/sys/log/nginx/example.com-access.log;
+            error_log /var/vcap/sys/log/nginx/example.com-error.log;
+            root /var/vcap/data/nginx/document_root;
+            index index.shtml;
+          }
+        }"
+network-properties:
+  network:
+    name: canyonlake-services-subnet
+  other_availability_zones:
+  - name: us-central1-f
+  - name: us-central1-c
+  - name: us-central1-b
+#  service_network:
+#    name: tiburon-services-subnet
+  singleton_availability_zone:
+    name: us-central1-f
+resource-config: {}
+errand-config: {}

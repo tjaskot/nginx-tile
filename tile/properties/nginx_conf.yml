@@ -1,0 +1,4 @@
+name: nginx_conf
+type: text
+configurable: true
+optional: false

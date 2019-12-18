@@ -1,0 +1,4 @@
+name: nginx
+release: nginx
+manifest: |
+  nginx_conf: (( .properties.nginx_conf.value ))
